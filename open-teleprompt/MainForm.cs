@@ -20,5 +20,10 @@ namespace open_teleprompt
         {
             speechtxt.Size = new Size(this.Size.Width - speechtxt.Location.X, this.Size.Height - speechtxt.Location.Y);
         }
+
+        private void runToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
