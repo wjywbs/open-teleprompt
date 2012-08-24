@@ -23,7 +23,10 @@ namespace open_teleprompt
 
         private void runToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            Teleprompter tp = new Teleprompter();
+            tp.ShowDialog();
+            this.Show();
         }
     }
 }
