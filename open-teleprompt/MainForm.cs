@@ -18,14 +18,18 @@ namespace open_teleprompt
 
         private void MainForm_Resize(object sender, EventArgs e)
         {
-            speechtxt.Size = new Size(this.Size.Width - speechtxt.Location.X, this.Size.Height - speechtxt.Location.Y);
+            speechtxt.Size = new Size(this.Size.Width - speechtxt.Location.X - 15, this.Size.Height - speechtxt.Location.Y - 40);
         }
 
         private void runToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
+
             Teleprompter tp = new Teleprompter();
+            tp.TeleText = speechtxt.Text;
             tp.ShowDialog();
+            Point str = speechtxt.GetPositionFromCharIndex(50);
+
             this.Show();
         }
     }

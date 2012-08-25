@@ -188,6 +188,7 @@
             this.speechtxt.Location = new System.Drawing.Point(0, 53);
             this.speechtxt.Multiline = true;
             this.speechtxt.Name = "speechtxt";
+            this.speechtxt.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.speechtxt.Size = new System.Drawing.Size(782, 500);
             this.speechtxt.TabIndex = 2;
             // 
