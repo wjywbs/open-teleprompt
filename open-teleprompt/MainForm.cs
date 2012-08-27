@@ -13,6 +13,7 @@ namespace open_teleprompt
         public MainForm()
         {
             InitializeComponent();
+            TeleSettings.LoadSettings();
             MainForm_Resize(null, null);
         }
 
@@ -27,10 +28,22 @@ namespace open_teleprompt
 
             Teleprompter tp = new Teleprompter();
             tp.TeleText = speechtxt.Text;
+            tp.TeleFont = new Font("黑体", 120);
+            //tp.BackColor = Color.Blue;
             tp.ShowDialog();
-            Point str = speechtxt.GetPositionFromCharIndex(50);
 
             this.Show();
+        }
+
+        private void setToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TeleSettingsForm tsf = new TeleSettingsForm();
+            tsf.ShowDialog();
+        }
+
+        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

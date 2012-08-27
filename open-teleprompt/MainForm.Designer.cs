@@ -39,6 +39,8 @@
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.teleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.setToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.maintoolStrip = new System.Windows.Forms.ToolStrip();
@@ -46,8 +48,7 @@
             this.opentoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.savetoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.speechtxt = new System.Windows.Forms.TextBox();
-            this.setToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.mainmenuStrip.SuspendLayout();
             this.maintoolStrip.SuspendLayout();
             this.SuspendLayout();
@@ -109,8 +110,9 @@
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(123, 24);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.quitToolStripMenuItem.Text = "退出";
+            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
             // teleToolStripMenuItem
             // 
@@ -128,6 +130,18 @@
             this.runToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.runToolStripMenuItem.Text = "开始";
             this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            // 
+            // setToolStripMenuItem
+            // 
+            this.setToolStripMenuItem.Name = "setToolStripMenuItem";
+            this.setToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.setToolStripMenuItem.Text = "设置";
+            this.setToolStripMenuItem.Click += new System.EventHandler(this.setToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -148,7 +162,8 @@
             this.maintoolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newtoolStripButton,
             this.opentoolStripButton,
-            this.savetoolStripButton});
+            this.savetoolStripButton,
+            this.toolStripSeparator3});
             this.maintoolStrip.Location = new System.Drawing.Point(0, 28);
             this.maintoolStrip.Name = "maintoolStrip";
             this.maintoolStrip.Size = new System.Drawing.Size(782, 25);
@@ -192,16 +207,10 @@
             this.speechtxt.Size = new System.Drawing.Size(782, 500);
             this.speechtxt.TabIndex = 2;
             // 
-            // setToolStripMenuItem
+            // toolStripSeparator3
             // 
-            this.setToolStripMenuItem.Name = "setToolStripMenuItem";
-            this.setToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
-            this.setToolStripMenuItem.Text = "设置";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
             // MainForm
             // 
@@ -213,6 +222,7 @@
             this.Controls.Add(this.mainmenuStrip);
             this.MainMenuStrip = this.mainmenuStrip;
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "open-teleprompt";
             this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.mainmenuStrip.ResumeLayout(false);
@@ -245,6 +255,7 @@
         private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem setToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }
 

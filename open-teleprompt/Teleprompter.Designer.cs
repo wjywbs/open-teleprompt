@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.sptxt = new System.Windows.Forms.TextBox();
+            this.teletimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // sptxt
@@ -39,7 +41,11 @@
             this.sptxt.Name = "sptxt";
             this.sptxt.Size = new System.Drawing.Size(800, 600);
             this.sptxt.TabIndex = 0;
-            this.sptxt.Visible = false;
+            // 
+            // teletimer
+            // 
+            this.teletimer.Interval = 40;
+            this.teletimer.Tick += new System.EventHandler(this.teletimer_Tick);
             // 
             // Teleprompter
             // 
@@ -53,6 +59,7 @@
             this.Name = "Teleprompter";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Teleprompter";
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Teleprompter_Paint);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Teleprompter_KeyPress);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -62,5 +69,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox sptxt;
+        private System.Windows.Forms.Timer teletimer;
     }
 }
