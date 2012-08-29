@@ -44,7 +44,7 @@
             // 
             // teletimer
             // 
-            this.teletimer.Interval = 40;
+            this.teletimer.Interval = 15;
             this.teletimer.Tick += new System.EventHandler(this.teletimer_Tick);
             // 
             // Teleprompter
@@ -59,8 +59,9 @@
             this.Name = "Teleprompter";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Teleprompter";
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Teleprompter_MouseUp);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Teleprompter_Paint);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Teleprompter_KeyPress);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Teleprompter_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 

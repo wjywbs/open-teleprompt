@@ -20,6 +20,8 @@ namespace open_teleprompt
             ftmp = TeleSettings.TextFont;
             ctmp = TeleSettings.TextColor;
             SetFontString(ftmp, ctmp);
+            textflip.Checked = TeleSettings.TextFlip;
+            showstatus.Checked = TeleSettings.ShowStatus;
         }
 
         void SetFontString(Font f, Color c)
@@ -51,7 +53,10 @@ namespace open_teleprompt
         private void bok_Click(object sender, EventArgs e)
         {
             TeleSettings.TextFont = ftmp;
+            TeleSettings.TextColor = ctmp;
             TeleSettings.BackGroundColor = colorchooser.BackColor;
+            TeleSettings.TextFlip = textflip.Checked;
+            TeleSettings.ShowStatus = showstatus.Checked;
             this.Close();
         }
 

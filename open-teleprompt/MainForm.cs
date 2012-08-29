@@ -28,8 +28,6 @@ namespace open_teleprompt
 
             Teleprompter tp = new Teleprompter();
             tp.TeleText = speechtxt.Text;
-            tp.TeleFont = new Font("黑体", 120);
-            //tp.BackColor = Color.Blue;
             tp.ShowDialog();
 
             this.Show();

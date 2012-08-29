@@ -36,6 +36,8 @@
             this.colorchooser = new System.Windows.Forms.Label();
             this.bok = new System.Windows.Forms.Button();
             this.bcancel = new System.Windows.Forms.Button();
+            this.textflip = new System.Windows.Forms.CheckBox();
+            this.showstatus = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -105,11 +107,33 @@
             this.bcancel.UseVisualStyleBackColor = true;
             this.bcancel.Click += new System.EventHandler(this.bcancel_Click);
             // 
+            // textflip
+            // 
+            this.textflip.AutoSize = true;
+            this.textflip.Location = new System.Drawing.Point(32, 97);
+            this.textflip.Name = "textflip";
+            this.textflip.Size = new System.Drawing.Size(132, 21);
+            this.textflip.TabIndex = 6;
+            this.textflip.Text = "文字水平翻转";
+            this.textflip.UseVisualStyleBackColor = true;
+            // 
+            // showstatus
+            // 
+            this.showstatus.AutoSize = true;
+            this.showstatus.Location = new System.Drawing.Point(32, 129);
+            this.showstatus.Name = "showstatus";
+            this.showstatus.Size = new System.Drawing.Size(115, 21);
+            this.showstatus.TabIndex = 7;
+            this.showstatus.Text = "显示状态栏";
+            this.showstatus.UseVisualStyleBackColor = true;
+            // 
             // TeleSettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(582, 355);
+            this.Controls.Add(this.showstatus);
+            this.Controls.Add(this.textflip);
             this.Controls.Add(this.bcancel);
             this.Controls.Add(this.bok);
             this.Controls.Add(this.colorchooser);
@@ -138,5 +162,7 @@
         private System.Windows.Forms.Label colorchooser;
         private System.Windows.Forms.Button bok;
         private System.Windows.Forms.Button bcancel;
+        private System.Windows.Forms.CheckBox textflip;
+        private System.Windows.Forms.CheckBox showstatus;
     }
 }

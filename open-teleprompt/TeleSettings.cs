@@ -9,6 +9,7 @@ namespace open_teleprompt
     {
         static Color bgc, tc;
         static Font f;
+        static bool bflip, bstatus;
         static List<reporter_bgcolor> reporter_bgc;
 
         public static Color BackGroundColor
@@ -29,6 +30,18 @@ namespace open_teleprompt
             set { f = value; }
         }
 
+        public static bool TextFlip
+        {
+            get { return bflip; }
+            set { bflip = value; }
+        }
+
+        public static bool ShowStatus
+        {
+            get { return bstatus; }
+            set { bstatus = value; }
+        }
+
         public static List<reporter_bgcolor> reporter_bgcolor_array
         {
             get { return reporter_bgc; }
@@ -39,11 +52,13 @@ namespace open_teleprompt
         {
             bgc = Color.Blue;
             tc = Color.White;
-            f = new Font("Arial", 30);
+            f = new Font("黑体", 120); //new Font("Arial", 30);
+            bflip = true;
+            bstatus = true;
             reporter_bgc = new List<reporter_bgcolor>();
             reporter_bgc.Add(new reporter_bgcolor("A:", Color.Blue));
-            reporter_bgc.Add(new reporter_bgcolor("B:", Color.GreenYellow));
-            reporter_bgc.Add(new reporter_bgcolor("C:", Color.Pink));
+            reporter_bgc.Add(new reporter_bgcolor("B:", Color.DarkGreen));
+            reporter_bgc.Add(new reporter_bgcolor("C:", Color.DeepPink));
         }
     }
 }
