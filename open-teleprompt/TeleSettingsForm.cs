@@ -22,6 +22,7 @@ namespace open_teleprompt
             SetFontString(ftmp, ctmp);
             textflip.Checked = TeleSettings.TextFlip;
             showstatus.Checked = TeleSettings.ShowStatus;
+            drawinterval.Text = TeleSettings.DrawInterval.ToString();
         }
 
         void SetFontString(Font f, Color c)
@@ -57,6 +58,13 @@ namespace open_teleprompt
             TeleSettings.BackGroundColor = colorchooser.BackColor;
             TeleSettings.TextFlip = textflip.Checked;
             TeleSettings.ShowStatus = showstatus.Checked;
+            int dwi; int.TryParse(drawinterval.Text, out dwi);
+            if (dwi < 0 || dwi > 300)
+            {
+                dwi = 15;
+                MessageBox.Show("屏幕刷新间隔不可小于0或大于300，将恢复为默认值15。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            TeleSettings.DrawInterval = dwi;
             this.Close();
         }
 

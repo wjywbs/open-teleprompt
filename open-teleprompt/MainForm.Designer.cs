@@ -169,7 +169,6 @@
             this.maintoolStrip.Size = new System.Drawing.Size(782, 25);
             this.maintoolStrip.TabIndex = 1;
             this.maintoolStrip.Text = "maintoolStrip";
-            this.maintoolStrip.Visible = false;
             // 
             // newtoolStripButton
             // 

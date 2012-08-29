@@ -29,6 +29,8 @@ namespace open_teleprompt
             Teleprompter tp = new Teleprompter();
             tp.TeleText = speechtxt.Text;
             tp.ShowDialog();
+            tp.Dispose();
+            GC.Collect();
 
             this.Show();
         }

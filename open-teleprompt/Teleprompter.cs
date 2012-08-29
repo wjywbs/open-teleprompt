@@ -13,11 +13,14 @@ namespace open_teleprompt
     public partial class Teleprompter : Form
     {
         int line_height, start_X;
-        int img_current_Y, speed, delta, img_height, hmax;
+        int img_current_Y, img_height, hmax, stsize;
+        int speed, delta, pcnt, draw_persec, timer_helper;
+        long start_time;
+        //bool running = false;
         string txt, line_end = "\r\n";
         List<string> splines = new List<string>();
         List<Color> splc = new List<Color>();
-        Image img;
+        Image img, status;
         Size scr;
 
         public Teleprompter()
@@ -25,13 +28,14 @@ namespace open_teleprompt
             InitializeComponent();
             scr = Screen.FromControl(this).Bounds.Size;
             this.Size = scr;
+            teletimer.Interval = TeleSettings.DrawInterval;
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
             this.MouseWheel += new MouseEventHandler(Teleprompter_MouseWheel);
         }
 
         public string TeleText
         {
-            set { value += " "; txt = value; sptxt.Text = value; }
+            set { value += " " + line_end + " "; txt = value; sptxt.Text = value; }
         }
 
         private void Teleprompter_KeyUp(object sender, KeyEventArgs e)
@@ -86,14 +90,14 @@ namespace open_teleprompt
         void DrawText()
         {
             int start_Y = scr.Height / 4 * 3, y = start_Y;
-            img_height = start_Y + (line_height + 20) * splines.Count + start_Y;
-            img = new Bitmap(scr.Width, img_height);
+            img_height = start_Y + line_height * (splines.Count - 1) + start_Y;
+            img = new Bitmap(scr.Width, img_height, PixelFormat.Format24bppRgb);
             Graphics g = Graphics.FromImage(img);
             g.FillRectangle(new SolidBrush(TeleSettings.BackGroundColor), 0, 0, img.Width, img.Height);
             for (int i = 0; i < splines.Count; i++)
             {
                 g.FillRectangle(new SolidBrush(splc[i]), 0, y, img.Width, line_height);
-                g.DrawString(splines[i], TeleSettings.TextFont, new SolidBrush(TeleSettings.TextColor), start_X, y);
+                g.DrawString(splines[i], TeleSettings.TextFont, new SolidBrush(TeleSettings.TextColor), -TeleSettings.TextFont.Size / 4, y);
                 y += line_height;
             }
             if (TeleSettings.TextFlip)
@@ -103,8 +107,11 @@ namespace open_teleprompt
         void SetParams()
         {
             img_current_Y = 0;
+            draw_persec = 1000 / TeleSettings.DrawInterval;
+            pcnt = draw_persec; // force draw in the first time
+            start_time = 0;
             hmax = img_height - scr.Height;
-            delta = scr.Height / 10 / (1000 / teletimer.Interval); //one tenth of screen per second
+            delta = scr.Height / 10 / draw_persec; //one tenth of screen per second
         }
 
         void ResetState(int cspeed, int imgY)
@@ -118,11 +125,45 @@ namespace open_teleprompt
             ProcessText();
             DrawText();
             SetParams();
+            DrawStatus();
 
             this.Controls.Remove(sptxt);
             Invalidate();
             teletimer.Start();
             return base.ShowDialog();
+        }
+
+        void DrawStatus()
+        {
+            int h = scr.Height / 20 + 1;
+            status = new Bitmap(scr.Width, h);
+            Graphics g = Graphics.FromImage(status);
+            g.FillRectangle(new SolidBrush(TeleSettings.BackGroundColor), 0, 0, status.Width, status.Height);
+            long time_elapsed = (start_time == 0 ? 0 : DateTime.Now.Ticks - start_time);
+            DateTime dt = new DateTime(time_elapsed);
+            StringBuilder s = new StringBuilder();
+            s.Append("速度：").Append(speed).Append("   时间：").Append(new DateTime(time_elapsed).ToString("HH:mm:ss"));
+            Font ori = TeleSettings.TextFont;
+            if (stsize == 0)
+            {
+                int sizetmp = 200;
+                while (sizetmp != stsize)
+                {
+                    int scur = (sizetmp + stsize) / 2;
+                    int fh = new Font(ori.FontFamily, scur).Height;
+                    if (fh > h)
+                        sizetmp = scur;
+                    else if (fh < h)
+                        stsize = scur;
+                    else
+                        stsize = sizetmp = scur;
+                    if (sizetmp - stsize <= 1)
+                        stsize = sizetmp = scur;
+                }
+            }
+            g.DrawString(s.ToString(), new Font(ori.FontFamily, stsize), new SolidBrush(TeleSettings.TextColor), start_X, 3);
+            if (TeleSettings.TextFlip)
+                status.RotateFlip(RotateFlipType.RotateNoneFlipX);
         }
 
         private void Teleprompter_Paint(object sender, PaintEventArgs e)
@@ -131,16 +172,42 @@ namespace open_teleprompt
                 ResetState(0, hmax);
             else if (img_current_Y < 0)
                 ResetState(0, 0);
+
             //Stopwatch sw = new Stopwatch();
             //sw.Start();
             e.Graphics.DrawImage(img, 0, -img_current_Y); // takes 7ms
             //sw.Stop();
+            //MessageBox.Show(sw.ElapsedMilliseconds.ToString());
+            if (TeleSettings.ShowStatus)
+            {
+                pcnt++;
+                if (pcnt > draw_persec / 5)
+                {
+                    pcnt = 0;
+                    DrawStatus();
+                }
+                e.Graphics.DrawImage(status, 0, 0);
+            }
         }
 
         private void teletimer_Tick(object sender, EventArgs e)
         {
-            img_current_Y += speed * delta;
-            Invalidate();
+            if (speed != 0)
+            {
+                if (start_time == 0) start_time = DateTime.Now.Ticks;
+                img_current_Y += speed * delta;
+                Invalidate();
+            }
+            else
+            {
+                timer_helper++;
+                if (timer_helper > draw_persec / 10)
+                {
+                    timer_helper = 0;
+                    pcnt = draw_persec;
+                    Invalidate();
+                }
+            }
         }
 
         void Teleprompter_MouseUp(object sender, MouseEventArgs e)

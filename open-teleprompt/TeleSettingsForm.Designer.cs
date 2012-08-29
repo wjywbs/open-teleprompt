@@ -38,6 +38,8 @@
             this.bcancel = new System.Windows.Forms.Button();
             this.textflip = new System.Windows.Forms.CheckBox();
             this.showstatus = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.drawinterval = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -57,7 +59,7 @@
             // fontchooser
             // 
             this.fontchooser.AutoSize = true;
-            this.fontchooser.Location = new System.Drawing.Point(131, 27);
+            this.fontchooser.Location = new System.Drawing.Point(219, 27);
             this.fontchooser.Name = "fontchooser";
             this.fontchooser.Size = new System.Drawing.Size(44, 17);
             this.fontchooser.TabIndex = 1;
@@ -80,7 +82,7 @@
             this.colorchooser.AutoSize = true;
             this.colorchooser.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.colorchooser.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.colorchooser.Location = new System.Drawing.Point(136, 63);
+            this.colorchooser.Location = new System.Drawing.Point(223, 63);
             this.colorchooser.Name = "colorchooser";
             this.colorchooser.Size = new System.Drawing.Size(26, 17);
             this.colorchooser.TabIndex = 3;
@@ -110,7 +112,7 @@
             // textflip
             // 
             this.textflip.AutoSize = true;
-            this.textflip.Location = new System.Drawing.Point(32, 97);
+            this.textflip.Location = new System.Drawing.Point(32, 132);
             this.textflip.Name = "textflip";
             this.textflip.Size = new System.Drawing.Size(132, 21);
             this.textflip.TabIndex = 6;
@@ -120,18 +122,38 @@
             // showstatus
             // 
             this.showstatus.AutoSize = true;
-            this.showstatus.Location = new System.Drawing.Point(32, 129);
+            this.showstatus.Location = new System.Drawing.Point(32, 164);
             this.showstatus.Name = "showstatus";
             this.showstatus.Size = new System.Drawing.Size(115, 21);
             this.showstatus.TabIndex = 7;
             this.showstatus.Text = "显示状态栏";
             this.showstatus.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(29, 98);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(178, 17);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "屏幕刷新间隔（毫秒）";
+            // 
+            // drawinterval
+            // 
+            this.drawinterval.Location = new System.Drawing.Point(221, 95);
+            this.drawinterval.MaxLength = 3;
+            this.drawinterval.Name = "drawinterval";
+            this.drawinterval.Size = new System.Drawing.Size(57, 27);
+            this.drawinterval.TabIndex = 9;
+            this.drawinterval.Text = "232";
+            // 
             // TeleSettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(582, 355);
+            this.Controls.Add(this.drawinterval);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.showstatus);
             this.Controls.Add(this.textflip);
             this.Controls.Add(this.bcancel);
@@ -164,5 +186,7 @@
         private System.Windows.Forms.Button bcancel;
         private System.Windows.Forms.CheckBox textflip;
         private System.Windows.Forms.CheckBox showstatus;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox drawinterval;
     }
 }
