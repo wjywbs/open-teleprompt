@@ -49,6 +49,8 @@
             this.savetoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.speechtxt = new System.Windows.Forms.TextBox();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.mainmenuStrip.SuspendLayout();
             this.maintoolStrip.SuspendLayout();
             this.SuspendLayout();
@@ -83,24 +85,28 @@
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.newToolStripMenuItem.Text = "新建";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.openToolStripMenuItem.Text = "打开";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.saveToolStripMenuItem.Text = "保存";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveasToolStripMenuItem
             // 
             this.saveasToolStripMenuItem.Name = "saveasToolStripMenuItem";
             this.saveasToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.saveasToolStripMenuItem.Text = "另存为";
+            this.saveasToolStripMenuItem.Click += new System.EventHandler(this.saveasToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -154,8 +160,9 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(108, 24);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.aboutToolStripMenuItem.Text = "关于";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // maintoolStrip
             // 
@@ -178,6 +185,7 @@
             this.newtoolStripButton.Name = "newtoolStripButton";
             this.newtoolStripButton.Size = new System.Drawing.Size(23, 22);
             this.newtoolStripButton.Text = "toolStripButton1";
+            this.newtoolStripButton.Click += new System.EventHandler(this.newtoolStripButton_Click);
             // 
             // opentoolStripButton
             // 
@@ -187,6 +195,7 @@
             this.opentoolStripButton.Name = "opentoolStripButton";
             this.opentoolStripButton.Size = new System.Drawing.Size(23, 22);
             this.opentoolStripButton.Text = "toolStripButton2";
+            this.opentoolStripButton.Click += new System.EventHandler(this.opentoolStripButton_Click);
             // 
             // savetoolStripButton
             // 
@@ -196,6 +205,7 @@
             this.savetoolStripButton.Name = "savetoolStripButton";
             this.savetoolStripButton.Size = new System.Drawing.Size(23, 22);
             this.savetoolStripButton.Text = "toolStripButton3";
+            this.savetoolStripButton.Click += new System.EventHandler(this.savetoolStripButton_Click);
             // 
             // toolStripSeparator3
             // 
@@ -212,6 +222,16 @@
             this.speechtxt.Size = new System.Drawing.Size(782, 500);
             this.speechtxt.TabIndex = 2;
             // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "txt";
+            this.saveFileDialog1.Filter = "文本文档|*.txt|所有文件|*.*";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "文本文档|*.txt|所有文件|*.*";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -224,6 +244,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "open-teleprompt";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.mainmenuStrip.ResumeLayout(false);
             this.mainmenuStrip.PerformLayout();
@@ -256,6 +277,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem setToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 
