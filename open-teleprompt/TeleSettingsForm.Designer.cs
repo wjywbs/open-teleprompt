@@ -145,7 +145,7 @@
             this.drawinterval.Name = "drawinterval";
             this.drawinterval.Size = new System.Drawing.Size(57, 27);
             this.drawinterval.TabIndex = 9;
-            this.drawinterval.Text = "232";
+            this.drawinterval.Text = "15";
             // 
             // TeleSettingsForm
             // 

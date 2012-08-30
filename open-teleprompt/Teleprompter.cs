@@ -138,7 +138,9 @@ namespace open_teleprompt
             int h = scr.Height / 20 + 1;
             status = new Bitmap(scr.Width, h);
             Graphics g = Graphics.FromImage(status);
-            g.FillRectangle(new SolidBrush(TeleSettings.BackGroundColor), 0, 0, status.Width, status.Height);
+            int wpart = (int)((double)img_current_Y / hmax * status.Width);
+            g.FillRectangle(new SolidBrush(Color.Purple), 0, 0, wpart, status.Height);
+            g.FillRectangle(new SolidBrush(TeleSettings.BackGroundColor), wpart, 0, status.Width - wpart, status.Height);
             long time_elapsed = (start_time == 0 ? 0 : DateTime.Now.Ticks - start_time);
             DateTime dt = new DateTime(time_elapsed);
             StringBuilder s = new StringBuilder();
