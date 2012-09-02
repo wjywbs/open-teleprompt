@@ -23,6 +23,19 @@ namespace open_teleprompt
             textflip.Checked = TeleSettings.TextFlip;
             showstatus.Checked = TeleSettings.ShowStatus;
             drawinterval.Text = TeleSettings.DrawInterval.ToString();
+            List<reporter_bgcolor> rbl = TeleSettings.reporter_bgcolor_array;
+            foreach (reporter_bgcolor rb in rbl)
+            {
+                ListViewItem lvi = new ListViewItem(rb.prefix);
+                lvi.UseItemStyleForSubItems = false;
+                ListViewItem.ListViewSubItem lvsi = new ListViewItem.ListViewSubItem();
+                lvsi.Font = new Font(lvsi.Font, FontStyle.Bold);
+                lvsi.Text = rb.color.Name;
+                //lvsi.BackColor = rb.color;
+                lvsi.ForeColor = rb.color;
+                lvi.SubItems.Add(lvsi);
+                lrset.Items.Add(lvi);
+            }
         }
 
         void SetFontString(Font f, Color c)

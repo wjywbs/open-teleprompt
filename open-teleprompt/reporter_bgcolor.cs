@@ -20,7 +20,7 @@ namespace open_teleprompt
         public reporter_bgcolor(XmlReader reader)
         {
             rprefix = XmlHelper.ReadStringAttribute(reader, "prefix");
-            c = Color.FromArgb(int.Parse(reader.GetAttribute("color")));
+            c = XmlHelper.ReadColorAttribute(reader);
         }
 
         public string prefix
@@ -39,7 +39,7 @@ namespace open_teleprompt
         {
             writer.WriteStartElement("reporter_bgcolor");
             writer.WriteAttributeString("prefix", rprefix);
-            writer.WriteAttributeString("color", c.ToArgb().ToString());
+            XmlHelper.WriteColorAttribute(writer, c);
             writer.WriteEndElement();
         }
     }

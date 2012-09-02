@@ -31,6 +31,11 @@ namespace open_teleprompt
         public static Color ReadColor(XmlReader reader)
         {
             move_reader(reader);
+            return ReadColorAttribute(reader);
+        }
+
+        public static Color ReadColorAttribute(XmlReader reader)
+        {
             if (reader.GetAttribute("name") != null)
                 return Color.FromName(reader.GetAttribute("name"));
             int result = 0;
@@ -51,11 +56,16 @@ namespace open_teleprompt
         public static void WriteColor(XmlWriter writer, string name, Color c)
         {
             writer.WriteStartElement(name);
+            WriteColorAttribute(writer, c);
+            writer.WriteEndElement();
+        }
+
+        public static void WriteColorAttribute(XmlWriter writer, Color c)
+        {
             if (c.IsKnownColor)
                 writer.WriteAttributeString("name", c.Name);
             else
                 writer.WriteAttributeString("argb", c.ToArgb().ToString());
-            writer.WriteEndElement();
         }
 
         public static void WriteFont(XmlWriter writer, string name, Font f)
