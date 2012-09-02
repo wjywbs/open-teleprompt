@@ -42,6 +42,10 @@
             this.drawinterval = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
+            // telecolorDialog
+            // 
+            this.telecolorDialog.FullOpen = true;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;

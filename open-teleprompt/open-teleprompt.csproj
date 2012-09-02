@@ -120,6 +120,7 @@
     <Compile Include="TeleSettingsForm.Designer.cs">
       <DependentUpon>TeleSettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="XmlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="img\NewDocument.png" />

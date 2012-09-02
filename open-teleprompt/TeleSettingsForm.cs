@@ -65,6 +65,7 @@ namespace open_teleprompt
                 MessageBox.Show("屏幕刷新间隔不可小于0或大于300，将恢复为默认值15。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             TeleSettings.DrawInterval = dwi;
+            TeleSettings.SaveSettings();
             this.Close();
         }
 

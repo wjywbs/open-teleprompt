@@ -22,10 +22,10 @@ namespace open_teleprompt
 
         private void website_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (Type.GetType("Mono.Runtime") == null)
+            if (!TeleSettings.UsingMono)
                 System.Diagnostics.Process.Start("explorer.exe", "http://code.google.com/p/open-teleprompt/");
             else
-                MessageBox.Show("http://code.google.com/p/open-teleprompt/", "网址", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("http://code.google.com/p/open-teleprompt/", "Website", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

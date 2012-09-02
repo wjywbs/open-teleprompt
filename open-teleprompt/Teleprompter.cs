@@ -13,11 +13,12 @@ namespace open_teleprompt
     public partial class Teleprompter : Form
     {
         int line_height, start_X;
-        int img_current_Y, img_height, hmax, stsize;
-        int speed, delta, pcnt, draw_persec, timer_helper;
+        int img_height, hmax, stsize;
+        int speed, pcnt, draw_persec, timer_helper;
+        double img_current_Y, delta;
         long start_time;
         //bool running = false;
-        string txt, line_end = "\r\n";
+        string txt, line_end;
         List<string> splines = new List<string>();
         List<Color> splc = new List<Color>();
         Image img, status;
@@ -29,13 +30,17 @@ namespace open_teleprompt
             scr = Screen.FromControl(this).Bounds.Size;
             this.Size = scr;
             teletimer.Interval = TeleSettings.DrawInterval;
+            if (TeleSettings.UsingMono)
+                line_end = "\n";
+            else
+                line_end = "\r\n";
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
             this.MouseWheel += new MouseEventHandler(Teleprompter_MouseWheel);
         }
 
         public string TeleText
         {
-            set { value += " " + line_end + " "; txt = value; sptxt.Text = value; }
+            set { value += " " + line_end + " "; sptxt.Text = value; }
         }
 
         private void Teleprompter_KeyUp(object sender, KeyEventArgs e)
@@ -60,8 +65,12 @@ namespace open_teleprompt
                 {
                     if (lines[i].StartsWith(rb[j].prefix))
                         lc[i] = rb[j].color;
+                    if (lines[i].Length == 0)
+                        lines[i] = " "; // avoid new line detection error 
                 }
             }
+            sptxt.Lines = lines;
+            txt = sptxt.Text;
 
             string ls;
             int length = txt.Length, pos = 0, line = 0;
@@ -111,7 +120,7 @@ namespace open_teleprompt
             pcnt = draw_persec; // force draw in the first time
             start_time = 0;
             hmax = img_height - scr.Height;
-            delta = scr.Height / 10 / draw_persec; //one tenth of screen per second
+            delta = (double)scr.Height / 20 / draw_persec; //one tenth of screen per second
         }
 
         void ResetState(int cspeed, int imgY)
@@ -135,7 +144,7 @@ namespace open_teleprompt
 
         void DrawStatus()
         {
-            int h = scr.Height / 20 + 1;
+            int h = scr.Height / 20 + 1; // use 1/20 height of screen to display status bar
             status = new Bitmap(scr.Width, h);
             Graphics g = Graphics.FromImage(status);
             int wpart = (int)((double)img_current_Y / hmax * status.Width);
@@ -177,7 +186,7 @@ namespace open_teleprompt
 
             //Stopwatch sw = new Stopwatch();
             //sw.Start();
-            e.Graphics.DrawImage(img, 0, -img_current_Y); // takes 7ms
+            e.Graphics.DrawImage(img, 0, (int)-img_current_Y); // takes 7ms
             //sw.Stop();
             //MessageBox.Show(sw.ElapsedMilliseconds.ToString());
             if (TeleSettings.ShowStatus)
