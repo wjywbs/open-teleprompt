@@ -61,6 +61,7 @@
             this.Text = "Teleprompter";
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Teleprompter_MouseUp);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Teleprompter_Paint);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Teleprompter_FormClosed);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Teleprompter_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();

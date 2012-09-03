@@ -236,5 +236,11 @@ namespace open_teleprompt
             else
                 speed--;
         }
+
+        private void Teleprompter_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            img.Dispose();
+            status.Dispose();
+        }
     }
 }

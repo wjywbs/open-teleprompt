@@ -93,7 +93,7 @@
             this.MinimizeBox = false;
             this.Name = "AboutForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "关于 open-teleprompt";
+            this.Text = "关于 open-teleprompt v1.0";
             this.ResumeLayout(false);
             this.PerformLayout();
 
