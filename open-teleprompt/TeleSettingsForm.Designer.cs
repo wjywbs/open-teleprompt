@@ -45,7 +45,7 @@
             this.tabreporter = new System.Windows.Forms.TabPage();
             this.brdel = new System.Windows.Forms.LinkLabel();
             this.bradd = new System.Windows.Forms.LinkLabel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.rintro = new System.Windows.Forms.TextBox();
             this.lrset = new System.Windows.Forms.ListView();
             this.lprefix = new System.Windows.Forms.ColumnHeader();
             this.lcolor = new System.Windows.Forms.ColumnHeader();
@@ -104,10 +104,10 @@
             this.tabgeneral.Controls.Add(this.label2);
             this.tabgeneral.Controls.Add(this.fontchooser);
             this.tabgeneral.Controls.Add(this.label1);
-            this.tabgeneral.Location = new System.Drawing.Point(4, 27);
+            this.tabgeneral.Location = new System.Drawing.Point(4, 22);
             this.tabgeneral.Name = "tabgeneral";
             this.tabgeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabgeneral.Size = new System.Drawing.Size(574, 282);
+            this.tabgeneral.Size = new System.Drawing.Size(574, 287);
             this.tabgeneral.TabIndex = 0;
             this.tabgeneral.Text = "基本";
             this.tabgeneral.UseVisualStyleBackColor = true;
@@ -117,7 +117,7 @@
             this.drawinterval.Location = new System.Drawing.Point(219, 92);
             this.drawinterval.MaxLength = 3;
             this.drawinterval.Name = "drawinterval";
-            this.drawinterval.Size = new System.Drawing.Size(57, 27);
+            this.drawinterval.Size = new System.Drawing.Size(57, 23);
             this.drawinterval.TabIndex = 17;
             this.drawinterval.Text = "15";
             // 
@@ -126,7 +126,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(27, 95);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(178, 17);
+            this.label3.Size = new System.Drawing.Size(147, 14);
             this.label3.TabIndex = 16;
             this.label3.Text = "屏幕刷新间隔（毫秒）";
             // 
@@ -135,7 +135,7 @@
             this.showstatus.AutoSize = true;
             this.showstatus.Location = new System.Drawing.Point(30, 162);
             this.showstatus.Name = "showstatus";
-            this.showstatus.Size = new System.Drawing.Size(115, 21);
+            this.showstatus.Size = new System.Drawing.Size(96, 18);
             this.showstatus.TabIndex = 15;
             this.showstatus.Text = "显示状态栏";
             this.showstatus.UseVisualStyleBackColor = true;
@@ -145,7 +145,7 @@
             this.textflip.AutoSize = true;
             this.textflip.Location = new System.Drawing.Point(30, 130);
             this.textflip.Name = "textflip";
-            this.textflip.Size = new System.Drawing.Size(132, 21);
+            this.textflip.Size = new System.Drawing.Size(110, 18);
             this.textflip.TabIndex = 14;
             this.textflip.Text = "文字水平翻转";
             this.textflip.UseVisualStyleBackColor = true;
@@ -157,7 +157,7 @@
             this.colorchooser.Cursor = System.Windows.Forms.Cursors.Hand;
             this.colorchooser.Location = new System.Drawing.Point(221, 60);
             this.colorchooser.Name = "colorchooser";
-            this.colorchooser.Size = new System.Drawing.Size(26, 17);
+            this.colorchooser.Size = new System.Drawing.Size(21, 14);
             this.colorchooser.TabIndex = 13;
             this.colorchooser.Text = "  ";
             this.colorchooser.Click += new System.EventHandler(this.colorchooser_Click);
@@ -167,7 +167,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(27, 60);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(93, 17);
+            this.label2.Size = new System.Drawing.Size(77, 14);
             this.label2.TabIndex = 12;
             this.label2.Text = "演播背景色";
             // 
@@ -176,7 +176,7 @@
             this.fontchooser.AutoSize = true;
             this.fontchooser.Location = new System.Drawing.Point(217, 24);
             this.fontchooser.Name = "fontchooser";
-            this.fontchooser.Size = new System.Drawing.Size(44, 17);
+            this.fontchooser.Size = new System.Drawing.Size(35, 14);
             this.fontchooser.TabIndex = 11;
             this.fontchooser.TabStop = true;
             this.fontchooser.Text = "font";
@@ -188,7 +188,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(27, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 17);
+            this.label1.Size = new System.Drawing.Size(63, 14);
             this.label1.TabIndex = 10;
             this.label1.Text = "演播字体";
             // 
@@ -196,12 +196,12 @@
             // 
             this.tabreporter.Controls.Add(this.brdel);
             this.tabreporter.Controls.Add(this.bradd);
-            this.tabreporter.Controls.Add(this.textBox1);
+            this.tabreporter.Controls.Add(this.rintro);
             this.tabreporter.Controls.Add(this.lrset);
-            this.tabreporter.Location = new System.Drawing.Point(4, 27);
+            this.tabreporter.Location = new System.Drawing.Point(4, 22);
             this.tabreporter.Name = "tabreporter";
             this.tabreporter.Padding = new System.Windows.Forms.Padding(3);
-            this.tabreporter.Size = new System.Drawing.Size(574, 282);
+            this.tabreporter.Size = new System.Drawing.Size(574, 287);
             this.tabreporter.TabIndex = 1;
             this.tabreporter.Text = "播音员";
             this.tabreporter.UseVisualStyleBackColor = true;
@@ -211,7 +211,7 @@
             this.brdel.AutoSize = true;
             this.brdel.Location = new System.Drawing.Point(147, 245);
             this.brdel.Name = "brdel";
-            this.brdel.Size = new System.Drawing.Size(42, 17);
+            this.brdel.Size = new System.Drawing.Size(35, 14);
             this.brdel.TabIndex = 19;
             this.brdel.TabStop = true;
             this.brdel.Text = "删除";
@@ -222,23 +222,23 @@
             this.bradd.AutoSize = true;
             this.bradd.Location = new System.Drawing.Point(73, 245);
             this.bradd.Name = "bradd";
-            this.bradd.Size = new System.Drawing.Size(42, 17);
+            this.bradd.Size = new System.Drawing.Size(35, 14);
             this.bradd.TabIndex = 18;
             this.bradd.TabStop = true;
             this.bradd.Text = "添加";
             this.bradd.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.bradd_LinkClicked);
             // 
-            // textBox1
+            // rintro
             // 
-            this.textBox1.BackColor = System.Drawing.Color.White;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(14, 17);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(261, 210);
-            this.textBox1.TabIndex = 17;
-            this.textBox1.Text = "可以为每一名播音员设置文字背景色。以设置的前缀开头的段落将显示特定背景色。\r\n\r\n操作说明：\r\n    点击添加按钮新建一条播音员背景色设置。\r\n    点击需要" +
+            this.rintro.BackColor = System.Drawing.Color.White;
+            this.rintro.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rintro.Location = new System.Drawing.Point(14, 17);
+            this.rintro.Multiline = true;
+            this.rintro.Name = "rintro";
+            this.rintro.ReadOnly = true;
+            this.rintro.Size = new System.Drawing.Size(261, 210);
+            this.rintro.TabIndex = 17;
+            this.rintro.Text = "可以为每一名播音员设置文字背景色。以设置的前缀开头的段落将显示特定背景色。\r\n\r\n操作说明：\r\n    点击添加按钮新建一条播音员背景色设置。\r\n    点击需要" +
                 "修改的前缀，再点击一次该前缀进行修改。点击颜色名称可修改背景色。\r\n    点击需要删除的一条设置的前缀，再点击删除按钮删除设置。";
             // 
             // lrset
@@ -271,7 +271,7 @@
             // 
             // TeleSettingsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(582, 355);
             this.Controls.Add(this.tabControl1);
@@ -313,7 +313,7 @@
         private System.Windows.Forms.ListView lrset;
         private System.Windows.Forms.ColumnHeader lprefix;
         private System.Windows.Forms.ColumnHeader lcolor;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox rintro;
         private System.Windows.Forms.LinkLabel brdel;
         private System.Windows.Forms.LinkLabel bradd;
     }

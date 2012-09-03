@@ -26,6 +26,8 @@ namespace open_teleprompt
             List<reporter_bgcolor> rbl = TeleSettings.reporter_bgcolor_array;
             foreach (reporter_bgcolor rb in rbl)
                 AddReporterBgcItem(rb.prefix, rb.color);
+            if (Environment.OSVersion.Version.Major >= 6)
+                rintro.BackColor = Color.White;
         }
 
         void AddReporterBgcItem(string prefix, Color color)

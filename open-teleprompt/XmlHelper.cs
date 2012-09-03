@@ -71,7 +71,7 @@ namespace open_teleprompt
         public static void WriteFont(XmlWriter writer, string name, Font f)
         {
             writer.WriteStartElement(name);
-            writer.WriteAttributeString("Name", string.IsNullOrEmpty(f.OriginalFontName) ? f.Name : f.OriginalFontName);
+            writer.WriteAttributeString("Name", f.Name);
             writer.WriteAttributeString("Size", f.Size.ToString());
             writer.WriteAttributeString("Style", f.Style.ToString());
             writer.WriteAttributeString("Unit", f.Unit.ToString());
