@@ -111,13 +111,13 @@ namespace open_teleprompt
                 Image img = new Bitmap(scr.Width, line_height, PixelFormat.Format24bppRgb);
                 Graphics g = Graphics.FromImage(img);
                 g.FillRectangle(new SolidBrush(splc[i]), 0, 0, img.Width, line_height);
-                Stopwatch sw = new Stopwatch();
-                sw.Start();
+                //Stopwatch sw = new Stopwatch();
+                //sw.Start();
                 g.DrawString(splines[i], TeleSettings.TextFont, new SolidBrush(TeleSettings.TextColor), margin_left, 0);
                 if (TeleSettings.TextFlip)
                     img.RotateFlip(RotateFlipType.RotateNoneFlipX);
-                sw.Stop();
-                MessageBox.Show(sw.ElapsedMilliseconds.ToString());
+                //sw.Stop();
+                //MessageBox.Show(sw.ElapsedMilliseconds.ToString());
                 imga[i] = img;
             }
         }
