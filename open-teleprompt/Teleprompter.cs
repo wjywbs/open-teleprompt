@@ -28,7 +28,7 @@ namespace open_teleprompt
         {
             InitializeComponent();
             scr = Screen.FromControl(this).Bounds.Size;
-            this.Size = scr;
+            //this.Size = scr;
             teletimer.Interval = TeleSettings.DrawInterval;
             if (TeleSettings.UsingMono)
                 line_end = "\n";
@@ -111,6 +111,10 @@ namespace open_teleprompt
             }
             if (TeleSettings.TextFlip)
                 img.RotateFlip(RotateFlipType.RotateNoneFlipX);
+            this.MaximumSize = this.MinimumSize = img.Size;
+            this.MinimumSize = img.Size;
+            this.Size = new Size(img.Width, img.Height);
+            this.BackgroundImage = img;
         }
 
         void SetParams()
@@ -179,26 +183,26 @@ namespace open_teleprompt
 
         private void Teleprompter_Paint(object sender, PaintEventArgs e)
         {
-            if (img_current_Y > hmax)
-                ResetState(0, hmax);
-            else if (img_current_Y < 0)
-                ResetState(0, 0);
+            //if (img_current_Y > hmax)
+            //    ResetState(0, hmax);
+            //else if (img_current_Y < 0)
+            //    ResetState(0, 0);
 
             //Stopwatch sw = new Stopwatch();
             //sw.Start();
-            e.Graphics.DrawImage(img, 0, (int)-img_current_Y); // takes 7ms
+            //e.Graphics.DrawImage(img, 0, (int)-img_current_Y); // takes 7ms
             //sw.Stop();
             //MessageBox.Show(sw.ElapsedMilliseconds.ToString());
-            if (TeleSettings.ShowStatus)
-            {
-                pcnt++;
-                if (pcnt > draw_persec / 5)
-                {
-                    pcnt = 0;
-                    DrawStatus();
-                }
-                e.Graphics.DrawImage(status, 0, 0);
-            }
+            //if (TeleSettings.ShowStatus)
+            //{
+            //    pcnt++;
+            //    if (pcnt > draw_persec / 5)
+            //    {
+            //        pcnt = 0;
+            //        DrawStatus();
+            //    }
+            //    e.Graphics.DrawImage(status, 0, 0);
+            //}
         }
 
         private void teletimer_Tick(object sender, EventArgs e)
@@ -207,7 +211,13 @@ namespace open_teleprompt
             {
                 if (start_time == 0) start_time = DateTime.Now.Ticks;
                 img_current_Y += speed * delta;
-                Invalidate();
+
+                if (img_current_Y > hmax)
+                    ResetState(0, hmax);
+                else if (img_current_Y < 0)
+                    ResetState(0, 0);
+
+                this.Location = new Point(0, (int)-img_current_Y);
             }
             else
             {
