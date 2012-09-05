@@ -12,7 +12,7 @@ namespace open_teleprompt
 {
     public partial class Teleprompter : Form
     {
-        int line_height, start_X;
+        int line_height, start_X, start_Y, word_end_Y;
         int img_height, hmax, stsize;
         int speed, pcnt, draw_persec, timer_helper;
         double img_current_Y, delta;
@@ -21,7 +21,8 @@ namespace open_teleprompt
         string txt, line_end;
         List<string> splines = new List<string>();
         List<Color> splc = new List<Color>();
-        Image img, status;
+        Image[] imga;
+        Image status;
         Size scr;
 
         public Teleprompter()
@@ -98,19 +99,27 @@ namespace open_teleprompt
 
         void DrawText()
         {
-            int start_Y = scr.Height / 4 * 3, y = start_Y;
-            img_height = start_Y + line_height * (splines.Count - 1) + start_Y;
-            img = new Bitmap(scr.Width, img_height, PixelFormat.Format24bppRgb);
-            Graphics g = Graphics.FromImage(img);
-            g.FillRectangle(new SolidBrush(TeleSettings.BackGroundColor), 0, 0, img.Width, img.Height);
+            start_Y = scr.Height / 4 * 3;
+            word_end_Y = start_Y + line_height * (splines.Count - 1); // there is a blank line added to the end
+            img_height = word_end_Y + start_Y; // add extra space
+            int margin_left = 0;
+            if (!TeleSettings.UsingMono)
+                margin_left = (int)-TeleSettings.TextFont.Size / 4;
+            imga = new Image[splines.Count];
             for (int i = 0; i < splines.Count; i++)
             {
-                g.FillRectangle(new SolidBrush(splc[i]), 0, y, img.Width, line_height);
-                g.DrawString(splines[i], TeleSettings.TextFont, new SolidBrush(TeleSettings.TextColor), -TeleSettings.TextFont.Size / 4, y);
-                y += line_height;
+                Image img = new Bitmap(scr.Width, line_height, PixelFormat.Format24bppRgb);
+                Graphics g = Graphics.FromImage(img);
+                g.FillRectangle(new SolidBrush(splc[i]), 0, 0, img.Width, line_height);
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
+                g.DrawString(splines[i], TeleSettings.TextFont, new SolidBrush(TeleSettings.TextColor), margin_left, 0);
+                if (TeleSettings.TextFlip)
+                    img.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                sw.Stop();
+                MessageBox.Show(sw.ElapsedMilliseconds.ToString());
+                imga[i] = img;
             }
-            if (TeleSettings.TextFlip)
-                img.RotateFlip(RotateFlipType.RotateNoneFlipX);
         }
 
         void SetParams()
@@ -154,6 +163,7 @@ namespace open_teleprompt
             DateTime dt = new DateTime(time_elapsed);
             StringBuilder s = new StringBuilder();
             s.Append("速度：").Append(speed).Append("   时间：").Append(new DateTime(time_elapsed).ToString("HH:mm:ss"));
+            s.Append(" 绘图： ").Append((sw.ElapsedMilliseconds / t)).Append("ms");
             Font ori = TeleSettings.TextFont;
             if (stsize == 0)
             {
@@ -177,6 +187,8 @@ namespace open_teleprompt
                 status.RotateFlip(RotateFlipType.RotateNoneFlipX);
         }
 
+        int t = 1;
+        Stopwatch sw = new Stopwatch();
         private void Teleprompter_Paint(object sender, PaintEventArgs e)
         {
             if (img_current_Y > hmax)
@@ -186,9 +198,31 @@ namespace open_teleprompt
 
             //Stopwatch sw = new Stopwatch();
             //sw.Start();
-            e.Graphics.DrawImage(img, 0, (int)-img_current_Y); // takes 7ms
+            //e.Graphics.DrawImage(img, 0, (int)-img_current_Y); // takes 7ms on i5, i7; takes >140ms on slow CPU
             //sw.Stop();
             //MessageBox.Show(sw.ElapsedMilliseconds.ToString());
+
+            Graphics g = e.Graphics;
+            if (img_current_Y < start_Y)
+                g.FillRectangle(new SolidBrush(TeleSettings.BackGroundColor), 0, 0, scr.Width, start_Y - (int)img_current_Y);
+            else if (img_current_Y > word_end_Y)
+                g.FillRectangle(new SolidBrush(TeleSettings.BackGroundColor), 0, (int)img_current_Y - word_end_Y,
+                    scr.Width, scr.Height); //not good now
+
+            int imgstart, imgend, draw_Y;
+            imgstart = (int)(img_current_Y - start_Y) / line_height;
+            if (imgstart < 0) imgstart = 0;
+            imgend = imgstart + scr.Height / line_height + 1;
+            draw_Y = (int)-img_current_Y + start_Y + imgstart * line_height;
+            sw.Start();
+            for (int i = imgstart; i <= imgend; i++)
+            {
+                if (draw_Y < scr.Height && i < imga.Length)
+                    g.DrawImage(imga[i], 0, draw_Y);
+                draw_Y += line_height;
+            }
+            sw.Stop(); t++;
+            
             if (TeleSettings.ShowStatus)
             {
                 pcnt++;
@@ -197,7 +231,7 @@ namespace open_teleprompt
                     pcnt = 0;
                     DrawStatus();
                 }
-                e.Graphics.DrawImage(status, 0, 0);
+                g.DrawImage(status, 0, 0);
             }
         }
 
@@ -239,7 +273,8 @@ namespace open_teleprompt
 
         private void Teleprompter_FormClosed(object sender, FormClosedEventArgs e)
         {
-            img.Dispose();
+            for (int i = 0; i < splines.Count; i++)
+                imga[i].Dispose();
             status.Dispose();
         }
     }
