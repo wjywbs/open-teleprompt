@@ -186,7 +186,8 @@ namespace open_teleprompt
 
             //Stopwatch sw = new Stopwatch();
             //sw.Start();
-            e.Graphics.DrawImage(img, 0, (int)-img_current_Y); // takes 7ms
+            e.Graphics.DrawImage(img, 0, 0,
+                new Rectangle(0, (int)img_current_Y, img.Width, scr.Height), GraphicsUnit.Pixel); // takes 7ms
             //sw.Stop();
             //MessageBox.Show(sw.ElapsedMilliseconds.ToString());
             if (TeleSettings.ShowStatus)

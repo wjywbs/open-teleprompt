@@ -23,11 +23,12 @@ namespace open_teleprompt
         private void MainForm_Resize(object sender, EventArgs e)
         {
             if (TeleSettings.UsingMono || Environment.OSVersion.Version.Major < 6)
-            {
                 speechtxt.Size = new Size(this.Size.Width - speechtxt.Location.X - 5, this.Size.Height - speechtxt.Location.Y - 25);
-            }
             else
+            {
                 speechtxt.Size = new Size(this.Size.Width - speechtxt.Location.X - 15, this.Size.Height - speechtxt.Location.Y - 40);
+                speechtxt.Location = new Point(0, 53);
+            }
         }
 
         private void runToolStripMenuItem_Click(object sender, EventArgs e)
